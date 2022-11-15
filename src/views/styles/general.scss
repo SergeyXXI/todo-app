@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Roboto:wght@400;500&display=swap');
+@import "reset";
+
+:root
+{
+    --color-text: #112D4E;
+    --color-primary: rgb(63, 114, 175); 
+    --color-hover-primary: rgb(54 97 149);     
+}
+
+body
+{
+    display: flex;  
+    min-width: 320px;  
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);    
+    color: var(--color-text);
+    font: 16px/1.5 'Roboto', sans-serif;
+    padding: 1rem;
+}
+input
+{
+    font-family: inherit;
+}
+button
+{
+    margin: 0;
+}
+
+.root
+{
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+}

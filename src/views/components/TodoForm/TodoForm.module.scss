@@ -1,0 +1,62 @@
+.form
+{
+    display: flex;
+    justify-content: center;    
+
+    & > input
+    {        
+        flex-basis: 250px;   
+        box-sizing: border-box;     
+        background: #DBE2EF;
+        color: inherit;
+        padding: 0 .7rem;
+        border: 1px solid rgba(177, 177, 177, 0.4);
+        border-radius: 5px 0 0 5px;
+        outline-offset: -1.5px;
+        outline: 1.5px solid transparent;              
+        transition: outline-color .2s;
+
+        &:focus-visible
+        {            
+            border-color: transparent;
+            outline: 1.5px solid var(--color-primary);            
+        }
+
+        &::placeholder
+        {
+            font-size: .75rem;
+            color: #7B7B7B;
+        }
+    }
+    & > button
+    {
+        display: flex;
+        height: 32px;
+        flex: 0 0 45px;
+        justify-content: center;
+        align-items: center;
+        background: var(--color-primary);
+        cursor: pointer;
+        border: none;
+        border-radius: 0px 5px 5px 0px;
+        transition: background-color .2s;
+
+        & > svg
+        {
+            transition: stroke .2s;
+        }
+
+        @media(any-hover: hover)
+        {
+            &:hover
+            {
+                background: var(--color-hover-primary);                
+
+                & > svg
+                {
+                    stroke: rgb(217 217 217);
+                }
+            }            
+        }
+    }
+}
