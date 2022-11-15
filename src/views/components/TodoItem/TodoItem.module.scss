@@ -5,7 +5,7 @@
     gap: 8px; 
     background: #DBE2EF;
     padding: 8px 1rem;
-    border-radius: 5px;
+    border-radius: 5px;     
 
     &:not(&:last-child)
     {
@@ -42,8 +42,7 @@
     {
         max-width: 390px;
         flex-grow: 1;
-        word-break: break-word;
-        // border-bottom: 1px solid transparent;
+        word-break: break-word;      
     }
     & > button
     {
@@ -59,6 +58,12 @@
         & > svg
         {
             transition: stroke .2s;
+
+            @media (max-width: 575px)
+            {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         @media (any-hover: hover)
@@ -72,6 +77,16 @@
             }
         }
     }
+
+    @media (max-width: 575px)
+    {
+        padding: 6px .75rem;
+
+        & > span, & > input[type="text"]
+        {
+            font-size: 14px;
+        }
+    }    
 }
 
 .checkBtn
