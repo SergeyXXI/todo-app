@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { persist, devtools } from 'zustand/middleware'
+import { persist, devtools } from 'zustand/middleware';
 import { generateId } from 'data/helpers';
 
 type Todo =
@@ -16,7 +16,8 @@ type TodoStore =
     addTodo: (title: string) => void,
     toggleEditMode: (id: Todo["id"]) => void,
     updateTodo: (id: Todo["id"], title: Todo["title"]) => void,
-    delTodo: (id: Todo["id"]) => void
+    delTodo: (id: Todo["id"]) => void,
+    reorder: (newOrder: Todo[]) => void
 };
 
 const useTodoStore = create<TodoStore>()
@@ -54,7 +55,12 @@ const useTodoStore = create<TodoStore>()
         delTodo: id => set(state => (
         {
             todos: state.todos.filter(todo => todo.id !== id)
-        }), false, "todo/delTodo")   
+        }), false, "todo/delTodo"),
+        reorder: newOrder => set(state => (
+        {
+            todos: newOrder 
+        }), false, "todo/reorder")
+
     }), { enabled: import.meta.env.DEV }), { name: "todos-storage" }));
 
 export { useTodoStore, type Todo };

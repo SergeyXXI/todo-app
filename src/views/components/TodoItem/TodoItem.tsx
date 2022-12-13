@@ -1,27 +1,28 @@
-import { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
+import { Reorder } from "framer-motion";
 import { Todo } from "data/stores/todoStore";
 import { ReactComponent as EditIcon } from "assets/icons/edit.svg";
 import { ReactComponent as TrashIcon } from "assets/icons/trash.svg";
 import { ReactComponent as CheckIcon } from "assets/icons/check.svg";
 import styles from "./TodoItem.module.scss";
 
-const checkBtnId = "check-btn";
-
 type TodoItemProps =
 {
-    id: Todo["id"],
-    title: Todo["title"],
-    isEditMode: Todo["isEditMode"],
+    todo: Todo,
     delTodo: (id: Todo["id"]) => void,
     toggleEdit: (id: Todo["id"]) => void,
     updateTodo: (id: Todo["id"], title: Todo["title"]) => void
 };
 
+const checkBtnId = "check-btn";
+
 export default function TodoItem(
-    { id, title, isEditMode, delTodo, toggleEdit, updateTodo }: TodoItemProps
+    { todo, delTodo, toggleEdit, updateTodo }: TodoItemProps
 )
 {    
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const { id, title, isEditMode } = todo;
 
     const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e =>
     {
@@ -43,7 +44,7 @@ export default function TodoItem(
         updateTodo(id, inputRef.current.value);
         toggleEdit(id);
     } 
-    const onDelete: React.MouseEventHandler<HTMLButtonElement> = e => delTodo(id);
+    const onDelete: React.MouseEventHandler<HTMLButtonElement> = e => delTodo(id);   
 
     useEffect(() =>
     {
@@ -52,7 +53,9 @@ export default function TodoItem(
     }, [isEditMode]);
 
     return (
-        <li className={styles.item}>
+        <Reorder.Item className={styles.item} value={todo} transition={{ duration: .3}}            
+            whileTap={{ cursor: "grabbing" }} dragTransition={{ bounceStiffness: 400 }}            
+        >         
         {
             isEditMode ?
             <>
@@ -74,6 +77,6 @@ export default function TodoItem(
             <button className={styles.delBtn} onClick={onDelete} disabled={isEditMode}>
                 <TrashIcon />
             </button>
-        </li>
+        </Reorder.Item>
     );
 }

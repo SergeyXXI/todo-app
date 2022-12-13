@@ -9,11 +9,10 @@
 }
 
 body
-{
-    display: flex;  
-    min-width: 288px;  
-    align-items: center;
-    justify-content: center;
+{    
+    box-sizing: border-box; 
+    min-width: 288px;
+    min-height: 100vh;      
     background: var(--color-primary);    
     color: var(--color-text);
     font: 16px/1.5 'Roboto', sans-serif;
@@ -26,11 +25,4 @@ input
 button
 {
     margin: 0;
-}
-
-.root
-{
-    display: flex;
-    flex-grow: 1;
-    justify-content: center;
 }

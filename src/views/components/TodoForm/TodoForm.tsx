@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useTodoStore } from "data/stores/todoStore";
 import { ReactComponent as Plus } from "assets/icons/plus.svg";
 import styles from "./TodoForm.module.scss";
@@ -25,11 +26,11 @@ export default function TodoForm()
     };   
     
     return (
-        <form className={styles.form} onSubmit={onSubmit} autoComplete="off">
+        <motion.form className={styles.form} onSubmit={onSubmit} autoComplete="off" layout>
             <input type="text" name="taskTitle" placeholder="Type your task here..." />
             <button>
                 <Plus />
             </button>
-        </form>
+        </motion.form>
     );
 }
