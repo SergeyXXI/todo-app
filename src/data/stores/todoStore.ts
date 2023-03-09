@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
 import { generateId } from 'data/helpers';
 
@@ -10,7 +10,7 @@ type Todo =
     createdAt: number
 };
 
-type TodoStore = 
+type TodoStore =
 {
     todos: Todo[],
     addTodo: (title: string) => void,
@@ -26,7 +26,7 @@ const useTodoStore = create<TodoStore>()
         todos: [],
         addTodo(title)
         {
-            const todoNew: Todo = 
+            const todoNew: Todo =
             {
                 id: generateId(),
                 title,
@@ -36,20 +36,20 @@ const useTodoStore = create<TodoStore>()
 
             set(state => ({ todos: [todoNew, ...state.todos]}), false, "todo/addTodo");
         },
-        toggleEditMode: id => set(state => (            
+        toggleEditMode: id => set(state => (
         {
-            todos: state.todos.map(todo => (            
+            todos: state.todos.map(todo => (
             {
                 ...todo,
-                isEditMode: todo.id === id ? !todo.isEditMode : todo.isEditMode           
-            }))          
+                isEditMode: todo.id === id ? !todo.isEditMode : todo.isEditMode
+            }))
         }), false, "todo/toggleEditMode"),
         updateTodo: (id, title) => set(state => (
         {
-            todos: state.todos.map(todo => (            
+            todos: state.todos.map(todo => (
             {
                 ...todo,
-                title: todo.id === id ? title : todo.title           
+                title: todo.id === id ? title : todo.title
             }))
         }), false, "todo/updateTodo"),
         delTodo: id => set(state => (
@@ -58,7 +58,7 @@ const useTodoStore = create<TodoStore>()
         }), false, "todo/delTodo"),
         reorder: newOrder => set(state => (
         {
-            todos: newOrder 
+            todos: newOrder
         }), false, "todo/reorder")
 
     }), { enabled: import.meta.env.DEV }), { name: "todos-storage" }));
